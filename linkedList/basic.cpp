@@ -23,37 +23,128 @@ Node *arrToLinkedList(int arr[])
     }
     return head;
 }
-int lenghtOfLL(Node *head){
+int lenghtOfLL(Node *head)
+{
     Node *temp = head;
-    int count=0;
+    int count = 0;
     while (temp)
     {
-        
+
         temp = temp->next;
         count++;
     }
     return count;
 }
-int checkIfPresent(Node *head,int data1){
+int checkIfPresent(Node *head, int data1)
+{
     Node *temp = head;
     while (temp)
     {
-        if(temp->data==data1)return 1;
+        if (temp->data == data1)
+            return 1;
         temp = temp->next;
     }
     return 0;
 }
-int main()
+void print(Node *head)
 {
-    int arr[5] = {12, 2, 3, 4, 5};
-    Node *head = arrToLinkedList(arr);
     Node *temp = head;
     while (temp)
     {
         cout << temp->data << " ";
         temp = temp->next;
     }
-    int check=checkIfPresent(head,6);
-    cout<<check;
+}
+Node *deleteHead(Node *head)
+{
+    Node *temp = head;
+    head = head->next;
+    delete temp;
+    return head;
+}
+Node *deleteTail(Node *head)
+{
+    Node *temp = head;
+    while (temp->next->next != NULL)
+    {
+        temp = temp->next;
+    }
+    delete temp->next->next;
+    temp->next = nullptr;
+    return head;
+}
+Node *deleteIndex(Node *head, int k)
+{
+   if(head==NULL)return head;
+   if(k==1){
+    Node *temp=head;
+    head=head->next;
+    free(temp);
+    return head;
+   }
+   int cnt=0;
+   Node *temp=head;
+   Node *prev=NULL;
+   while(temp!=NULL){
+    cnt++;
+    if(cnt==k){
+        prev->next=prev->next->next;
+        free(temp);
+        break;
+    }
+    prev=temp;
+    temp=temp->next;
+   }
+   return head;
+}
+Node *insertEleAtHead(Node *head,int k){
+    Node *temp;
+    temp->data=k;
+    temp->next=head;
+    return temp;
+}
+Node *insertEleAtTail(Node *head,int k){
+    Node *temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    Node *temp2;
+    temp->next=temp2;
+    temp2->data=k;
+    temp2->next=NULL;
+    return head;
+
+}
+Node *insertAtIndex(Node *head,int index,int ele){
+    if(index==1){
+        Node *temp;
+    temp->data=ele;
+    temp->next=head;
+    return temp;
+    }
+    Node *temp=head;
+    Node *prev=NULL;
+    int cnt=0;
+    while(temp!=NULL){
+        cnt++;
+        if(cnt==index){
+            Node *temp2;
+            temp2->data=ele;
+            prev->next=temp2;
+            temp2->next=temp;
+            return head;
+        }
+        prev=temp;
+        temp=temp->next;
+    }
+    return head;
+}
+
+int main()
+{
+    int arr[5] = {12, 2, 3, 4, 5};
+    Node *head = arrToLinkedList(arr);
+    head=insertAtIndex(head,5,23);
+    print(head);
     return 0;
 }
