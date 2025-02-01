@@ -104,12 +104,13 @@ Node *insertEleAtHead(Node *head,int k){
     return temp;
 }
 Node *insertEleAtTail(Node *head,int k){
+    if(head==NULL)return new Node(k,NULL);
     Node *temp=head;
     while(temp->next!=NULL){
         temp=temp->next;
-    }
+    } 
     Node *temp2;
-    temp->next=temp2;
+    temp->next=temp2; 
     temp2->data=k;
     temp2->next=NULL;
     return head;
@@ -117,24 +118,18 @@ Node *insertEleAtTail(Node *head,int k){
 }
 Node *insertAtIndex(Node *head,int index,int ele){
     if(index==1){
-        Node *temp;
-    temp->data=ele;
-    temp->next=head;
+        Node *temp=new Node(ele,head);
+    
     return temp;
     }
     Node *temp=head;
-    Node *prev=NULL;
-    int cnt=0;
+    int cnt=1;
     while(temp!=NULL){
         cnt++;
         if(cnt==index){
-            Node *temp2;
-            temp2->data=ele;
-            prev->next=temp2;
-            temp2->next=temp;
-            return head;
+            Node *temp2=new Node(ele,temp->next);
+            temp->next=temp2;
         }
-        prev=temp;
         temp=temp->next;
     }
     return head;
@@ -144,7 +139,7 @@ int main()
 {
     int arr[5] = {12, 2, 3, 4, 5};
     Node *head = arrToLinkedList(arr);
-    head=insertAtIndex(head,5,23);
+    head=insertAtIndex(head,6,23);
     print(head);
     return 0;
 }
