@@ -129,6 +129,7 @@ Node *insertAtIndex(Node *head,int index,int ele){
         if(cnt==index){
             Node *temp2=new Node(ele,temp->next);
             temp->next=temp2;
+            break;
         }
         temp=temp->next;
     }
