@@ -135,12 +135,23 @@ Node *insertAtIndex(Node *head,int index,int ele){
     }
     return head;
 }
-
+Node* reverseLL(Node * head){
+ Node * current=head;
+ Node *prev=NULL;
+ Node *next;
+ while(current!=NULL){
+    next=current->next;
+    current->next=prev;
+    prev=current;
+    current=next;
+ }
+ return prev;
+}
 int main()
 {
     int arr[5] = {12, 2, 3, 4, 5};
     Node *head = arrToLinkedList(arr);
-    head=insertAtIndex(head,6,23);
+   head= reverseLL(head);
     print(head);
     return 0;
 }
