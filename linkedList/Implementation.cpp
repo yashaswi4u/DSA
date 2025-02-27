@@ -117,7 +117,7 @@ Node *insertEleAtTail(Node *head,int k){
 
 }
 Node *insertAtIndex(Node *head,int index,int ele){
-    if(index==1){
+    if(index==){
         Node *temp=new Node(ele,head);
     
     return temp;
@@ -136,22 +136,32 @@ Node *insertAtIndex(Node *head,int index,int ele){
     return head;
 }
 Node* reverseLL(Node * head){
- Node * current=head;
- Node *prev=NULL;
- Node *next;
- while(current!=NULL){
+Node* current=head;
+Node* prev=NULL;
+Node*next;
+while(current!=NULL){
     next=current->next;
     current->next=prev;
     prev=current;
     current=next;
- }
- return prev;
+}
+return prev;
+}
+Node* f(Node* head){
+    if(head->next==NULL){
+        cout<<head->data;
+        
+    }
+    else{
+        f(head->next);
+        cout<<head->data;
+    }
+
 }
 int main()
 {
     int arr[5] = {12, 2, 3, 4, 5};
     Node *head = arrToLinkedList(arr);
-   head= reverseLL(head);
-    print(head);
+    f(head);
     return 0;
 }
